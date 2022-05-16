@@ -11,4 +11,9 @@ public class Main {
         double example2 = 2.2727272;
         System.out.printf("The total paintable area is %.2f", example2);
     }
+
+    public void sqaure(int a) {
+        int square = a*a;
+        System.out.println("Sqaure is" + a);
+    }
 }

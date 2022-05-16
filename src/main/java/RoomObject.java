@@ -7,20 +7,24 @@ public class RoomObject
 {
     private float Height;
     private float Width;
-    protected float size = 0.0f;
+    private float excludableArea = 0.0f;//protected so it can be accessed in tests (maybe not needed)
+    private float objectArea = 0.0f;
 
     private RoomObject(Builder builder)
     {
         this.Height = builder.Height;
         this.Width = builder.Width;
-        this.size = builder.size;
+        this.excludableArea = builder.excludableArea;
+        this.objectArea = builder.objectArea;
     }
 
     public static class Builder
     {
         private float Height;
         private float Width;
-        float size;
+
+        protected float excludableArea;
+        public float objectArea;
 
         public Builder setHeight(float height)
         {
@@ -36,13 +40,13 @@ public class RoomObject
         public Builder addSocket(float width, float height)
         {
 
-            this.size -= width*height;
+            this.excludableArea += width*height;
             return this;
         }
 
         public Builder setSize(float width, float height)
         {
-            this.size = width*height;
+            this.objectArea = width*height;
             return this;
         }
         public RoomObject build(){
@@ -53,7 +57,10 @@ public class RoomObject
 
     protected float getPaintableSize()
     {
-        return size;
+        //if a user adds more excludable areas than the size of the wall,
+        //return 0
+
+        return this.objectArea < this.excludableArea ? 0 : this.objectArea - this.excludableArea;
     };
 
 }
