@@ -7,7 +7,6 @@ public class Main {
 
 
     public static void main(String[] args) {
-
         float bucketCapacity = 0.0f;
         float bucketCoverFactor = 0.0f;
         float bucketQuantity = 0.0f;
@@ -50,7 +49,7 @@ public class Main {
             if(choice.equals("NO"))
             {
                 break;
-                //
+                //exit the current while loop (no more walls to be added)
             }
         }
         while(true);
@@ -65,11 +64,15 @@ public class Main {
 
         for(RoomObject wall : Walls)
         {
+            //calculate the total paintable area
             totalPaintableArea += wall.getPaintableSize();
+
+            //calculate the number of buckets required for the wall, by taking the capacity
+            //of the bucket(l) and dividing it by the liters per square meter (l/m2).
             bucketQuantity += wall.getPaintableSize() / (bucketCapacity * bucketCoverFactor);
         }
 
-
+        //add a bit more paint in case they make mistakes.
         bucketQuantity *= 1.1;
 
 
