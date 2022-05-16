@@ -1,12 +1,27 @@
 import jdk.jfr.Label;
+import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-
     public static void main(String[] args) {
+
+        //TESTING
+        try
+        {
+            //Re-assigns the standard input stream to a text file containing pre-set test parameters.
+            System.setIn(new FileInputStream(new File("src/main/java/org/example/testScenario.txt")));
+        }catch (FileNotFoundException fnfe)
+        {
+            System.out.println("Unable to open test file.");
+            System.exit(-1);
+        }
+
         float bucketCapacity = 0.0f;
         float bucketCoverFactor = 0.0f;
         float bucketQuantity = 0.0f;
@@ -54,14 +69,13 @@ public class Main {
         }
         while(true);
 
-
         System.out.print("Please enter the capacity of the desired paint can, in liters\n");
         bucketCapacity = StringScanner.readFloat();
 
         System.out.print("What is the square meter per litre listed on the paint can? \n");
         bucketCoverFactor = StringScanner.readFloat();
 
-
+        System.out.print("Building your room... \r\n ");
         for(RoomObject wall : Walls)
         {
             //calculate the total paintable area
@@ -77,7 +91,8 @@ public class Main {
 
 
         System.out.printf("The total paintable area is %.2fm\u00b2, which will require %.2f cans of paint. ", totalPaintableArea, bucketQuantity);
-        System.out.print("\r\n This estimation includes a 10%% extra, to allow for errors, damages or obstacles.");
+        System.out.print("\r\n This estimation includes a 10% extra, to allow for errors, damages or obstacles.");
+
 
     }
 

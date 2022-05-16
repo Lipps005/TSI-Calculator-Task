@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import java.awt.*;
 
 
@@ -18,7 +20,7 @@ public class RoomObject
     {
         private float Height;
         private float Width;
-        private float size;
+        float size;
 
         public Builder setHeight(float height)
         {
@@ -33,15 +35,11 @@ public class RoomObject
 
         public Builder addSocket(float width, float height)
         {
+
             this.size -= width*height;
             return this;
         }
 
-        public Builder addDoor(float width, float height)
-        {
-            this.size -= width*height;
-            return this;
-        }
         public Builder setSize(float width, float height)
         {
             this.size = width*height;
